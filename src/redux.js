@@ -7,7 +7,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import renderjson from 'renderjson';
 
-const defaultSeparator = '::';
+const defaultSeparator = ':';
 const config = {
   separator: defaultSeparator,
 };
@@ -33,10 +33,10 @@ export function monitorState($container, store) {
 
 export function allActionsForService(services) {
   const serviceKeys = Object.entries(services);
-  const serviceReducer = (types, [serviceName, service]) => {
-    const actionTypes = Object.keys(service.types);
-    actionTypes.forEach(actionType => types.push(`${serviceName}${config.separator}${actionType}`));
-    return types;
+  const serviceReducer = (allTypes, [serviceName, service]) => {
+    const { types } = service;
+    Object.keys(types).forEach(actionType => allTypes.push(`${serviceName}${config.separator}${actionType}`));
+    return allTypes;
   };
   return serviceKeys.reduce(serviceReducer, []);
 }

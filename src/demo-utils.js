@@ -23,7 +23,6 @@ export function eventHandlers(services, store) {
   handleSelection(services);
 } */
 
-const textTmplt = field => `<input id="${field}" type="text" placeholder="${field}"/>`;
 
 export function createActionTemplate(actionFields) {
   const reducer = (template, field) => `${template}<div class="auto cell">${textTmplt(field)}<div>`;
