@@ -1,4 +1,4 @@
-import { allActionsForService } from './redux';
+import { allActionTypesForServices } from './redux';
 import * as React from 'react';
 
 function renderOption(optionName) {
@@ -18,7 +18,7 @@ function ActionSelect({ actions }) {
 }
 
 export function createActionSelect(services) {
-  const allActions = allActionsForService(services);
+  const allActions = allActionTypesForServices(services);
   return (
     <ActionSelect actions={allActions} />
   );

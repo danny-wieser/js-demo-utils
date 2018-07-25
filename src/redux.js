@@ -31,12 +31,9 @@ export function monitorState($container, store) {
   });
 }
 
-export function allActionsForService(services) {
-  const serviceKeys = Object.entries(services);
-  const serviceReducer = (allTypes, [serviceName, service]) => {
-    const { types } = service;
-    Object.keys(types).forEach(actionType => allTypes.push(`${serviceName}${config.separator}${actionType}`));
-    return allTypes;
-  };
-  return serviceKeys.reduce(serviceReducer, []);
+const actionTypeTemplate = (serviceName, actionType) => `${serviceName}${config.separator}${actionType}`;
+const serviceReducer = (allTypes, [serviceName, service]) => {
+  const typeKeys = Object.keys(service.types)
+  return allTypes.concat(typeKeys.map(type => actionTypeTemplate(serviceName, type)));
 }
+export const allActionTypesForServices = services => Object.entries(services).reduce(serviceReducer, []);

@@ -24,7 +24,7 @@ const testServices = {
 };
 
 test('generates a list of all types included in the services object', () => {
-  const allTypes = redux.allActionsForService(testServices);
+  const allTypes = redux.allActionTypesForServices(testServices);
   expect(allTypes).toHaveLength(6);
   expect(allTypes[0]).toEqual('serviceA:typeA');
 });
