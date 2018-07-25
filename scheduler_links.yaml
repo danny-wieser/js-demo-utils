@@ -1,0 +1,29 @@
+##########################################################################################
+###  THESE ARE HREF LINKS, DO NOT TRANSLATE ##############################################
+##########################################################################################
+login:
+  help-link: "https://help.blackboard.com/002_000en_US"
+  privacy-policy: "https://help.blackboard.com/1000en_US"
+  terms-of-use: "https://help.blackboard.com/1001en_US"
+session:
+  help-links:
+    moderator: "https://help.blackboard.com/002_106en_US"
+    participant: "https://help.blackboard.com/002_205en_US"
+    moderator-lti: "https://help.blackboard.com/002_107en_US"
+    participant-lti: "https://help.blackboard.com/002_206en_US"
+    xl-sessions: "https://help.blackboard.com/002_109en_US"
+    moderator-dialin: "https://help.blackboard.com/002_110en_US"
+    participant-dialin: "https://help.blackboard.com/002_208en_US"
+recording:
+  help-links:
+    moderator: "https://help.blackboard.com/002_108en_US"
+    moderator-lti: "https://help.blackboard.com/002_108en_US"
+    participant: "https://help.blackboard.com/002_207en_US"
+    participant-lti: "https://help.blackboard.com/002_207en_US"
+user:
+  help-links:
+    moderator: "https://help.blackboard.com/002_209en_US"
+    moderator-lti: "https://help.blackboard.com/002_209en_US"
+    participant: "https://help.blackboard.com/002_209en_US"
+    participant-lti: "https://help.blackboard.com/002_209en_US"
+    csv-upload: "https://help.blackboard.com/002_209en_US"
