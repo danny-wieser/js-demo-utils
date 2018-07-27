@@ -1,22 +1,6 @@
 /* eslint-env browser */
 import * as ReactDOM from 'react-dom';
-import * as reduxUtils from '../src/redux';
+import * as demoUtils from '../src';
+import demoServices from '../src/test-data';
 
-const demoServices = {
-  serviceA: {
-    types: {
-      typeA: 'typeA',
-      typeB: 'typeB',
-      typeC: 'typeC',
-    },
-  },
-  serviceB: {
-    types: {
-      typeD: 'typeD',
-      typeE: 'typeE',
-      typeF: 'typeF',
-    },
-  },
-};
-
-ReactDOM.render(reduxUtils.createActionSelect(demoServices), document.getElementById('content'));
+ReactDOM.render(demoUtils.createActionSelect(demoServices), document.getElementById('action-select'));

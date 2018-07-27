@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 
 /* function dispatchAction(services, store) {
   const selectedAction = $('#action-select').val();
@@ -23,13 +23,14 @@ export function eventHandlers(services, store) {
   handleSelection(services);
 } */
 
+// const textTmplt = field => `<input id="${field}" type="text" placeholder="${field}"/>`;
 
-export function createActionTemplate(actionFields) {
+/* export function createActionTemplate(actionFields) {
   const reducer = (template, field) => `${template}<div class="auto cell">${textTmplt(field)}<div>`;
   return actionFields.reduce(reducer, '');
-}
+} */
 
-export function appendActionTemplate(actionsFields, container) {
+/* export function appendActionTemplate(actionsFields, container) {
   $(createActionTemplate(actionsFields)).appendTo(container);
 }
 
@@ -42,3 +43,11 @@ export function fieldVals(fieldNames) {
   };
   return fieldNames.reduce(reducer, {});
 }
+*/
+
+/* export function monitorState($container, store) {
+  store.subscribe(() => {
+    $container.empty();
+    $container.append(renderjson(store.getState()));
+  });
+} */
