@@ -5,6 +5,11 @@ export default {
       typeB: 'typeB',
       typeC: 'typeC',
     },
+    forms: {
+      typeA: ['fieldA', 'fieldB'],
+      typeB: ['fieldC', 'fieldD'],
+      typeC: ['fieldE', 'fieldF']
+    }
   },
   serviceB: {
     types: {

@@ -2,7 +2,8 @@ import * as components from './components';
 import * as redux from './redux'
 
 export const {
-  createActionSelect
+  createActionSelect,
+  ReduxServiceDemo
 } = components;
 
 export const {

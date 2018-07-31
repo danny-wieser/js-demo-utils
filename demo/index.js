@@ -1,6 +1,9 @@
 /* eslint-env browser */
 import * as ReactDOM from 'react-dom';
-import * as demoUtils from '../src';
 import demoServices from '../src/test-data';
+import { ReduxServiceDemo } from '../src';
+import * as React from 'react';
 
-ReactDOM.render(demoUtils.createActionSelect(demoServices), document.getElementById('action-select'));
+ReactDOM.render(
+  <ReduxServiceDemo services={demoServices} />, document.getElementById('container')
+);
