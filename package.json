@@ -10,10 +10,11 @@
     "docs": "jsdoc src/*.js",
     "test": "jest && yarn run lint",
     "demo": "webpack-serve --config demo/webpack.config.js --content demo",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "css-build": "node-sass --omit-source-map-url sass/index.scss css/index.css"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./src/setupTests.js"
+    "setupTestFrameworkScriptFile": "./setupTests.js"
   },
   "dependencies": {
     "jquery": "^3.3.1",
@@ -30,6 +31,8 @@
     "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "bulma": "^0.7.1",
+    "css-loader": "^1.0.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "4.19.1",
@@ -39,6 +42,9 @@
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
     "jest": "^23.4.1",
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "webpack": "^4.16.2",
     "webpack-serve": "^2.0.2"
   }

@@ -17,5 +17,10 @@ export default {
       typeE: 'typeE',
       typeF: 'typeF',
     },
+    forms: {
+      typeD: ['fieldG', 'fieldH'],
+      typeE: ['fieldI', 'fieldJ'],
+      typeF: ['fieldK', 'fieldL']
+    }
   },
 };
