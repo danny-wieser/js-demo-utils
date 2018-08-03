@@ -1,10 +1,7 @@
-import * as components from './components';
+import { ReduxServiceDemo } from './redux-service-demo';
 import * as redux from './redux'
 
-export const {
-  createActionSelect,
-  ReduxServiceDemo
-} = components;
+export { ReduxServiceDemo };
 
 export const {
   initializeDemoStore,

@@ -1,11 +1,8 @@
 import * as React from 'react';
+import { ActionForm } from './action-form';
 
 function getDefaultAction(defaultService) {
   return Object.keys(defaultService.types)[0];
-}
-
-function getActiveActionForm(services, activeService, activeAction) {
-  return activeService && activeAction ? services[activeService].forms[activeAction] : [];
 }
 
 function renderActionOption(optionName) {
@@ -49,27 +46,6 @@ const ActionSelect = ({ services, activeService, handleActionSelect }) => {
   );
 }
 
-function renderFormInput(fieldName) {
-  return (
-    <div className="field" key={fieldName}>
-      <div className="control">
-        <input
-          className="input is-medium"
-          id={fieldName}
-          type="text"
-          placeholder={fieldName}/>
-      </div>
-    </div>
-  )
-}
-
-function ActionForm({ services, activeService, activeAction }) {
-  const formFields = getActiveActionForm(services, activeService, activeAction);
-  return (
-    formFields.map(item => renderFormInput(item))
-  );
-}
-
 export class ReduxServiceDemo extends React.Component {
   constructor(props) {
     super(props);
@@ -79,17 +55,12 @@ export class ReduxServiceDemo extends React.Component {
       activeAction: getDefaultAction(props.services[allServices[0]])
     };
     this.handleActionSelect = this.handleActionSelect.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleServiceSelect = this.handleServiceSelect.bind(this);
   }
 
   handleActionSelect(event) {
     const activeAction = event.target.value;
     this.setState({ activeAction });
-  }
-
-  handleSubmit(event) {
-    console.log('form submit');
   }
 
   handleServiceSelect(event) {
@@ -114,6 +85,7 @@ export class ReduxServiceDemo extends React.Component {
           activeService={this.state.activeService}
           activeAction={this.state.activeAction}
           services={this.props.services}
+          store={this.props.store}
         />
       </div>
     );
