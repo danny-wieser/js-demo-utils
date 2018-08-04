@@ -4,7 +4,7 @@ function getActiveActionForm(services, activeService, activeAction) {
   return activeService && activeAction ? services[activeService].forms[activeAction] : [];
 }
 
-function renderFormInput(fieldName, updatePayload) {
+function renderFormInput(fieldName, updateFieldValue) {
   return (
     <div className="field" key={fieldName}>
       <div className="control">
@@ -12,7 +12,7 @@ function renderFormInput(fieldName, updatePayload) {
           className="input is-medium"
           id={fieldName}
           type="text"
-          onChange={updatePayload}
+          onChange={updateFieldValue}
           placeholder={fieldName}/>
       </div>
     </div>
@@ -33,10 +33,10 @@ export class ActionForm extends React.Component {
     const formFields = getActiveActionForm(props.services, props.activeService, props.activeAction);
     this.state = {
       formFields,
-      payload: {},
+      fieldValues: {},
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.updatePayload = this.updatePayload.bind(this);
+    this.updateFieldValue = this.updateFieldValue.bind(this);
   }
 
   componentWillReceiveProps({ services, activeService, activeAction }) {
@@ -47,20 +47,21 @@ export class ActionForm extends React.Component {
   handleSubmit() {
     const service = this.props.services[this.props.activeService];
     const actionDispatch = service.actions[this.props.activeAction];
-    this.props.store.dispatch(actionDispatch(this.state.payload));
-    this.setState({ payload: {} });
+    const fieldVals = Object.values(this.state.fieldValues);
+    this.props.store.dispatch(actionDispatch.apply(null, fieldVals));
+    this.setState({ fieldValues: {} });
   }
 
-  updatePayload(event) {
+  updateFieldValue(event) {
     const fieldName = event.target.id;
     const fieldVal = event.target.value;
-    this.setState({ payload: { ...this.state.payload, [fieldName]: fieldVal } });
+    this.setState({ fieldValues: { ...this.state.fieldValues, [fieldName]: fieldVal } });
   }
 
   render() {
     return (
       <div>
-        {this.state.formFields.map(item => renderFormInput(item, this.updatePayload))}
+        {this.state.formFields.map(item => renderFormInput(item, this.updateFieldValue))}
         <ActionSubmitButton
           handleSubmit={this.handleSubmit}
         />

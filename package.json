@@ -49,6 +49,7 @@
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.2",
-    "webpack-serve": "^2.0.2"
+    "webpack-serve": "^2.0.2",
+    "whatwg-fetch": "^2.0.4"
   }
 }

@@ -14,5 +14,5 @@ module.exports = () => ({
   mode,
   output: { filename, path: outpath },
   entry: path.join(__dirname, 'index'),
-  resolve: { extensions: ['.js', '.jsx'] },
+  resolve: { extensions: ['.js', '.jsx'] }
 });

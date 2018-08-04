@@ -2,27 +2,30 @@
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import { ReduxServiceDemo, initializeDemoStore } from '../src';
-import * as serviceA from './servicea';
-import * as serviceB from './serviceb';
+import * as todos from './todos-service';
+import * as anotherService from './another-service';
 import '../src/index.scss';
 
-const state = { serviceA: serviceA.reducer, serviceB: serviceB.reducer };
+const state = {
+  todos: todos.reducer,
+  anotherService: anotherService.reducer,
+};
 const store = initializeDemoStore(state);
 
 const services = {
-  serviceA: {
-    types: serviceA.types,
-    actions: serviceA.actions,
+  todos: {
+    types: todos.types,
+    actions: todos.actions,
     forms: {
-      actionType1: ['action1FieldA', 'action1FieldB'],
-      thunkAction2: ['action2FieldA', 'action2FieldB'],
+      fetchTodoById: ['id'],
+      addTodo: ['userId', 'title']
     },
   },
-  serviceB: {
-    types: serviceB.types,
-    actions: serviceB.actions,
+  anotherService: {
+    types: anotherService.types,
+    actions: anotherService.actions,
     forms: {
-      typeB: ['fieldB-1', 'fieldB-2'],
+      someAction: ['fieldA', 'fieldB'],
     },
   },
 };
