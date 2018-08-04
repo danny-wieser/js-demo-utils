@@ -1,11 +1,10 @@
-import { Action } from '../src/redux';
-import { createReducer } from '../src/redux';
+import { Action, createReducer } from '../src/redux';
 
 export const types = {
   typeB: 'typeB',
 };
 
-const typeB = payload => dispatch => {
+const typeB = payload => (dispatch) => {
   dispatch(Action(types.typeB, { payload }));
   return { ...payload };
 };

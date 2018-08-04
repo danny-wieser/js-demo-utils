@@ -32,11 +32,16 @@ export class ActionForm extends React.Component {
     super(props);
     const formFields = getActiveActionForm(props.services, props.activeService, props.activeAction);
     this.state = {
+      formFields,
       payload: {},
-      formFields
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updatePayload = this.updatePayload.bind(this);
+  }
+
+  componentWillReceiveProps({ services, activeService, activeAction }) {
+    const formFields = getActiveActionForm(services, activeService, activeAction);
+    this.setState({ formFields });
   }
 
   handleSubmit() {
@@ -48,7 +53,7 @@ export class ActionForm extends React.Component {
   updatePayload(event) {
     const fieldName = event.target.id;
     const fieldVal = event.target.value;
-    this.state.payload = { ...this.state.payload, [fieldName]: fieldVal };
+    this.setState({ payload: { ...this.state.payload, [fieldName]: fieldVal } });
   }
 
   render() {

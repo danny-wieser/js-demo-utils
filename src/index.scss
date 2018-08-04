@@ -11,3 +11,13 @@ $family-sans-serif: "Roboto Mono", sans-serif;
 @import "../node_modules/bulma/sass/components/tabs.sass";
 @import "../node_modules/bulma/sass/elements/title.sass";
 @import "../node_modules/bulma/sass/layout/section.sass";
+@import "../node_modules/bulma/sass/grid/tiles.sass";
+
+.state {
+  margin-top: 10px;
+  background-color: #303030;
+  color: #ffb86c;
+  padding: 20px;
+  font-style: italic;
+  border-radius: 4px;
+}

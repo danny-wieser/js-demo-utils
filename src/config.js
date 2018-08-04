@@ -1,9 +1,9 @@
-const defaultSeparator = ':';
-
 export const config = {
-  separator: defaultSeparator,
+  useLogger: true,
+  useThunk: true,
 };
 
 export function configure(opts) {
-  config.separator = opts.separator || defaultSeparator;
+  config.userLogger = opts.useLogger;
+  config.useThunk = opts.useThunk;
 }

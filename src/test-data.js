@@ -8,8 +8,8 @@ export default {
     forms: {
       typeA: ['fieldA', 'fieldB'],
       typeB: ['fieldC', 'fieldD'],
-      typeC: ['fieldE', 'fieldF']
-    }
+      typeC: ['fieldE', 'fieldF'],
+    },
   },
   serviceB: {
     types: {
@@ -20,7 +20,7 @@ export default {
     forms: {
       typeD: ['fieldG', 'fieldH'],
       typeE: ['fieldI', 'fieldJ'],
-      typeF: ['fieldK', 'fieldL']
-    }
+      typeF: ['fieldK', 'fieldL'],
+    },
   },
 };

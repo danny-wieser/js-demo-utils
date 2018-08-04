@@ -1,10 +1,6 @@
 import * as React from 'react';
 import { ActionForm } from './action-form';
 
-function getDefaultAction(defaultService) {
-  return Object.keys(defaultService.types)[0];
-}
-
 function renderActionOption(optionName) {
   return (
     <option key={optionName} value={optionName}>
@@ -46,16 +42,31 @@ const ActionSelect = ({ services, activeService, handleActionSelect }) => {
   );
 }
 
+const StateMonitor = ({ stateString })=> {
+  return (
+    <div>
+      <pre className="state">{ stateString }</pre>
+    </div>
+  );
+}
+
+const stateToString = state => JSON.stringify(state, null, 2);
+
 export class ReduxServiceDemo extends React.Component {
   constructor(props) {
     super(props);
     const allServices = Object.keys(props.services);
+    const activeService = allServices[0];
+    const activeAction = Object.keys(props.services[activeService].types)[0];
+
     this.state = {
-      activeService: allServices[0],
-      activeAction: getDefaultAction(props.services[allServices[0]])
+      activeService,
+      activeAction,
+      stateString: stateToString(props.store.getState())
     };
     this.handleActionSelect = this.handleActionSelect.bind(this);
     this.handleServiceSelect = this.handleServiceSelect.bind(this);
+    props.store.subscribe(state => this.setState({ stateString: stateToString(props.store.getState()) }));
   }
 
   handleActionSelect(event) {
@@ -65,7 +76,7 @@ export class ReduxServiceDemo extends React.Component {
 
   handleServiceSelect(event) {
     const activeService = event.target.id;
-    const activeAction = getDefaultAction(this.props.services[activeService]);
+    const activeAction = Object.keys(this.props.services[activeService].types)[0];
     this.setState({ activeService, activeAction });
   }
 
@@ -86,6 +97,9 @@ export class ReduxServiceDemo extends React.Component {
           activeAction={this.state.activeAction}
           services={this.props.services}
           store={this.props.store}
+        />
+        <StateMonitor
+          stateString={this.state.stateString}
         />
       </div>
     );
