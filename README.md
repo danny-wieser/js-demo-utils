@@ -1,5 +1,9 @@
-# js-demo-utils
-A set of utilities for creating demo applications in Javascript, Redux and React
+# redux-service-demo
+A React UI for testing Redux Service components without the need to integrate them into a large application
+
+[![Build Status](https://travis-ci.org/danny-wieser/redux-service-demo.svg?branch=master)](https://travis-ci.org/danny-wieser/redux-service-demo)
+
+
 
 ## Overview
 
