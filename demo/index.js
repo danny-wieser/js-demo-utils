@@ -18,7 +18,7 @@ const services = {
     actions: todos.actions,
     forms: {
       fetchTodoById: ['id'],
-      addTodo: ['userId', 'title']
+      addTodo: ['userId', 'title'],
     },
   },
   anotherService: {

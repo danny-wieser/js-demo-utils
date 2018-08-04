@@ -1,7 +1,13 @@
-import 'whatwg-fetch';
-import { Action, ok, fail, createReducer } from '../src/redux';
+/* eslint-disable import/no-extraneous-dependencies */
+import * as fetch from 'whatwg-fetch';
+import {
+  Action,
+  ok,
+  fail,
+  createReducer,
+} from '../src/redux';
 
-//an example redux data service using the todos api here: http://jsonplaceholder.typicode.com/
+// an example redux data service using the todos api here: http://jsonplaceholder.typicode.com/
 const todosPath = 'https://jsonplaceholder.typicode.com/todos';
 const getTodoByIdPath = id => `${todosPath}/${id}`;
 
@@ -10,39 +16,39 @@ export const types = {
   addTodo: 'addTodo',
 };
 
-const retrieveTodo = async(id) => {
+const retrieveTodo = async (id) => {
   const response = await fetch(getTodoByIdPath(id));
   return response.ok ? response.json() : Promise.reject(new Error(response.status));
-}
+};
 
-const createTodo = async(userId, title) => {
+const createTodo = async (userId, title) => {
   const response = await fetch(todosPath, {
     method: 'POST',
     body: JSON.stringify({ title, userId, completed: false }),
     headers: {
-      "Content-type": "application/json; charset=UTF-8"
-    }
+      'Content-type': 'application/json; charset=UTF-8',
+    },
   });
   return response.ok ? response.json() : Promise.reject(new Error(response.status));
-}
+};
 
 export const fetchTodoById = id => async (dispatch) => {
-  dispatch(Action(types.fetchTodoById, { payload: { id }}));
+  dispatch(Action(types.fetchTodoById, { payload: { id } }));
   try {
     const payload = await retrieveTodo(id);
     dispatch(Action(ok(types.fetchTodoById), { payload }));
   } catch (error) {
-    dispatch(Action(fail(types.fetchTodoById), { payload: { error }}));
+    dispatch(Action(fail(types.fetchTodoById), { payload: { error } }));
   }
 };
 
 export const addTodo = (userId, title) => async (dispatch) => {
-  dispatch(Action(types.addTodo, { payload: { userId, title }}));
+  dispatch(Action(types.addTodo, { payload: { userId, title } }));
   try {
     const payload = await createTodo(userId, title);
     dispatch(Action(ok(types.addTodo), { payload }));
   } catch (error) {
-    dispatch(Action(fail(types.addTodo), { payload: { error }}));
+    dispatch(Action(fail(types.addTodo), { payload: { error } }));
   }
 };
 
@@ -53,7 +59,7 @@ export const actions = {
 
 export const INITIAL_STATE = {};
 
-function fetchTodoByIdLoading(state, action) {
+function fetchTodoByIdLoading(state) {
   return { ...state, isLoading: true };
 }
 
@@ -62,12 +68,11 @@ function fetchTodoByIdOK(state, action) {
   return { ...state, isLoading: false, [id]: { ...action.payload } };
 }
 
-function fetchTodoByIdFail(state, action) {
-  //in a real service we would do something with this error of course
+function fetchTodoByIdFail(state) {
   return { ...state, isLoading: false, hasError: true };
 }
 
-function addTodoLoading(state, action) {
+function addTodoLoading(state) {
   return { ...state, isLoading: true };
 }
 
@@ -76,8 +81,7 @@ function addTodoOK(state, action) {
   return { ...state, isLoading: false, [id]: { ...action.payload } };
 }
 
-function addTodoFail(state, action) {
-  //in a real service we would do something with this error of course
+function addTodoFail(state) {
   return { ...state, isLoading: false, hasError: true };
 }
 
