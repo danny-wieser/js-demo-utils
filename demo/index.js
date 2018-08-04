@@ -1,10 +1,15 @@
 /* eslint-env browser */
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import { ReduxServiceDemo, initializeDemoStore } from '../src';
+import { configure, ReduxServiceDemo, initializeDemoStore } from '../src';
 import * as todos from './todos-service';
 import * as anotherService from './another-service';
 import '../src/index.scss';
+
+configure({
+  useLogger: true,
+  title: 'Redux Service Demo',
+});
 
 const state = {
   todos: todos.reducer,

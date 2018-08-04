@@ -1,9 +1,9 @@
 export const config = {
   useLogger: true,
-  useThunk: true,
+  title: 'Redux Service Demo'
 };
 
 export function configure(opts) {
-  config.userLogger = opts.useLogger;
-  config.useThunk = opts.useThunk;
+  config.useLogger = opts.useLogger;
+  config.title = opts.title;
 }

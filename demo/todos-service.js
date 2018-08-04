@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import * as fetch from 'whatwg-fetch';
+import 'whatwg-fetch';
 import {
   Action,
   ok,

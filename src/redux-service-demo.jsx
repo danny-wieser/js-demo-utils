@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ActionForm } from './action-form';
+import { config } from './config';
 
 export function renderActionOption(optionName) {
   return (
@@ -82,26 +83,29 @@ export class ReduxServiceDemo extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <ServiceTabs
-          services={this.props.services}
-          activeService={this.state.activeService}
-          handleServiceSelect={this.handleServiceSelect}/>
-        <ActionSelect
-          services={this.props.services}
-          activeService={this.state.activeService}
-          handleActionSelect={this.handleActionSelect}
-        />
-        <ActionForm
-          activeService={this.state.activeService}
-          activeAction={this.state.activeAction}
-          services={this.props.services}
-          store={this.props.store}
-        />
-        <StateMonitor
-          stateString={this.state.stateString}
-        />
-      </div>
+      <section className="section">
+        <div className="container">
+          <h1 className="title has-text-centered">{config.title}</h1>
+          <ServiceTabs
+            services={this.props.services}
+            activeService={this.state.activeService}
+            handleServiceSelect={this.handleServiceSelect}/>
+          <ActionSelect
+            services={this.props.services}
+            activeService={this.state.activeService}
+            handleActionSelect={this.handleActionSelect}
+          />
+          <ActionForm
+            activeService={this.state.activeService}
+            activeAction={this.state.activeAction}
+            services={this.props.services}
+            store={this.props.store}
+          />
+          <StateMonitor
+            stateString={this.state.stateString}
+          />
+        </div>
+      </section>
     );
   }
 }

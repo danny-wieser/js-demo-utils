@@ -5,10 +5,21 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import { config } from './config';
+
+function getMiddleware() {
+
+  return middleware;
+}
 
 export function initializeDemoStore(state) {
   const allReducers = combineReducers(state);
-  return createStore(allReducers, applyMiddleware(thunk, logger));
+  const middlewares = [ thunk ];
+  if (config.useLogger) {
+    middlewares.push(logger);
+  }
+  console.log(middlewares);
+  return createStore(allReducers, applyMiddleware(...middlewares));
 }
 
 const OK = 'ok';
