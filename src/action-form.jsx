@@ -48,6 +48,7 @@ export class ActionForm extends React.Component {
     const service = this.props.services[this.props.activeService];
     const actionDispatch = service.actions[this.props.activeAction];
     this.props.store.dispatch(actionDispatch(this.state.payload));
+    this.setState({ payload: {} });
   }
 
   updatePayload(event) {
