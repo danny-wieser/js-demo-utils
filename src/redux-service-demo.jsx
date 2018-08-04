@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ActionForm } from './action-form';
 
-function renderActionOption(optionName) {
+export function renderActionOption(optionName) {
   return (
     <option key={optionName} value={optionName}>
       {optionName}
@@ -9,7 +9,7 @@ function renderActionOption(optionName) {
   );
 }
 
-function renderTab(serviceName, activeService, handleServiceSelect) {
+export function renderTab(serviceName, activeService, handleServiceSelect) {
   const activeClass = activeService === serviceName ? 'is-active' : '';
   return (
     <li key={serviceName} className={activeClass}>
@@ -18,7 +18,7 @@ function renderTab(serviceName, activeService, handleServiceSelect) {
   );
 }
 
-const ServiceTabs = ({ services, activeService, handleServiceSelect }) => {
+export const ServiceTabs = ({ services, activeService, handleServiceSelect }) => {
   const serviceNames = Object.keys(services);
   return (
     <div className="tabs is-centered">
@@ -29,7 +29,7 @@ const ServiceTabs = ({ services, activeService, handleServiceSelect }) => {
   );
 }
 
-const ActionSelect = ({ services, activeService, handleActionSelect }) => {
+export const ActionSelect = ({ services, activeService, handleActionSelect }) => {
   const allActions = Object.keys(services[activeService].types);
   return (
     <div className="field">
@@ -42,7 +42,7 @@ const ActionSelect = ({ services, activeService, handleActionSelect }) => {
   );
 }
 
-const StateMonitor = ({ stateString })=> {
+export const StateMonitor = ({ stateString })=> {
   return (
     <div>
       <pre className="state">{ stateString }</pre>

@@ -7,8 +7,9 @@
   "author": "<danny.wieser@blackboard.com>",
   "license": "MIT",
   "scripts": {
+    "clean": "rimraf dist coverage yarn-error.log",
     "docs": "jsdoc src/*.js",
-    "test": "jest && yarn run lint",
+    "test": "jest --coverage --collectCoverageFrom=src/** && yarn run lint",
     "demo": "webpack-serve --config demo/webpack.config.js --content demo",
     "lint": "eslint .",
     "css-build": "node-sass --omit-source-map-url sass/index.scss css/index.css"
@@ -44,6 +45,7 @@
     "eslint-plugin-react": "^7.10.0",
     "jest": "^23.4.1",
     "node-sass": "^4.9.2",
+    "rimraf": "^2.6.2",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "webpack": "^4.16.2",
