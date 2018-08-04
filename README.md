@@ -3,14 +3,16 @@ A React UI for testing Redux Service components without the need to integrate th
 
 [![Build Status](https://travis-ci.org/danny-wieser/redux-service-demo.svg?branch=master)](https://travis-ci.org/danny-wieser/redux-service-demo)
 
-
-
 ## Overview
 
-Striving to avoid developing monolith javascript single-page apps, you may find yourself creating small components in individual repositories, with each including a barebones demo application to allow testing that component without needing to pull into a more complex parent application.
+A Redux Data Service is a Redux wrapper for an API that maps API functionality to Redux Actions.
 
-This library provides several utility functions for implementing those demo applications, with a main focus on a "data-service" component implemented using Redux.
+Each service will manage/populate a slice of state that can be combined to implement larger applications.
 
-## Documentation
+Striving to develop micro-components vs monolithic apps, you might create Redux Data Services that live alongside each micro-service API utilized in your application.
 
-JSDocs to come, please see in-line documentation for the time being
+This demo application allows testing of each individual Redux Service in a simple UI that presents a list of services and actions for each. Configuration is used to specify data fields that need to be collected to each action, and then the action dispatch can be tested, either connected to a live API or using a mock api layer.
+
+## Usage
+
+`npm install redux-service-demo`
