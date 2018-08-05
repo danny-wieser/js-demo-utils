@@ -1,6 +1,6 @@
 import { ReduxServiceDemo } from './redux-service-demo';
 import * as redux from './redux';
-import { configure, config } from './config'
+import { configure, config } from './config';
 
 export { ReduxServiceDemo, configure, config };
 
