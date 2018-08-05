@@ -1,41 +1,29 @@
 import * as React from 'react';
-import { shallow, mount } from 'enzyme';
-import { ActionForm } from './action-form';
-import { ReduxServiceDemo } from './redux-service-demo';
-jest.mock('./action-form')
+import { mount } from 'enzyme';
+import ReduxServiceDemo from './redux-service-demo';
+import services from './example-services';
 
-const services = {
-  serviceA: {
-    types: {
-      typeA: 'typeA',
-      typeB: 'typeB',
-    },
-    forms: {
-      typeA: ['fieldA', 'fieldB'],
-      typeB: ['fieldC', 'fieldD'],
-    },
-  },
-  serviceB: {
-    types: {
-      typeD: 'typeD',
-      typeE: 'typeE',
-      typeF: 'typeF',
-    },
-    forms: {
-      typeD: ['fieldG', 'fieldH'],
-      typeE: ['fieldI', 'fieldJ'],
-      typeF: ['fieldK', 'fieldL'],
-    },
-  },
-};
+jest.mock('./action-form');
+jest.mock('./redux-service-demo.components', () => ({
+  ServiceTabs: () => null,
+  ActionSelect: () => null,
+  StateMonitor: () => null,
+  stateToString: () => 'stateToStringMock',
+}));
+jest.mock('./config', () => ({
+  config: { title: 'mocked title' },
+}));
 
 describe('the ReduxServiceDemo class', () => {
   let store;
   let wrapper;
+  let subscribeCallback;
   beforeEach(() => {
     store = {
       getState: jest.fn(),
-      subscribe: jest.fn(),
+      subscribe: jest.fn((callback) => {
+        subscribeCallback = callback;
+      }),
     };
     wrapper = mount(
       <ReduxServiceDemo
@@ -45,42 +33,28 @@ describe('the ReduxServiceDemo class', () => {
     );
   });
 
-  test('will render the service tabs', () => {
-    expect(wrapper.find('div.tabs').find('li')).toHaveLength(2);
+  test('displays the page title based on the configuration', () => {
+    expect(wrapper.find('h1.title').text()).toBe('mocked title');
   });
 
-  test('will default the active service to the first defined service', () => {
-    expect(wrapper.find('li').at(0).hasClass('is-active')).toEqual(true);
+  test('defaults activeService/activeType to first defined service, first type', () => {
+    expect(wrapper.state().activeService).toBe('serviceA');
+    expect(wrapper.state().activeAction).toBe('typeA');
   });
 
-  test('will default to the type selections for the first defined service', () => {
-    const select = wrapper.find('select');
-    expect(select.find('option').at(0).text()).toEqual('typeA');
-    expect(select.find('option').at(1).text()).toEqual('typeB');
+  test('updates the state active service, type on a call to handleServiceSelect', () => {
+    wrapper.instance().handleServiceSelect({ target: { id: 'serviceB' } });
+    expect(wrapper.state().activeService).toBe('serviceB');
+    expect(wrapper.state().activeAction).toBe('typeD');
   });
 
-  test('will subscribe to store changes', () => {
-    expect(store.subscribe.mock.calls).toHaveLength(1);
+  test('updates the state active type on a call to handleActionSelect', () => {
+    wrapper.instance().handleActionSelect({ target: { value: 'typeB' } });
+    expect(wrapper.state().activeAction).toBe('typeB');
   });
 
-  describe('when the active service is changed', () => {
-    beforeEach(() => {
-      wrapper.find('div.tabs').find('a').at(1).simulate('click');
-    });
-
-    test('will set the is-active class on the active service', () => {
-      expect(wrapper.find('li').at(1).hasClass('is-active')).toEqual(true);
-    });
-
-    test('will update the type selections based on the active service', () => {
-      const select = wrapper.find('select');
-      expect(select.find('option').at(0).text()).toEqual('typeD');
-      expect(select.find('option').at(1).text()).toEqual('typeE');
-      expect(select.find('option').at(2).text()).toEqual('typeF');
-    });
-
-    test('will update the form based on the ', () => {
-
-    });
+  test('should update the state string on subscribe callback', () => {
+    subscribeCallback();
+    expect(wrapper.state().stateString).toBe('stateToStringMock');
   });
 });

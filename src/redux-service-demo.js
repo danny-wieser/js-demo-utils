@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { ActionForm } from './action-form';
 import { config } from './config';
 import {
@@ -8,20 +9,18 @@ import {
   stateToString,
 } from './redux-service-demo.components';
 
-export class ReduxServiceDemo extends React.Component {
+export default class ReduxServiceDemo extends React.Component {
   constructor(props) {
     super(props);
     const allServices = Object.keys(props.services);
     const activeService = allServices[0];
     const activeAction = Object.keys(props.services[activeService].types)[0];
-    this.state = {
-      activeService,
-      activeAction,
-      stateString: stateToString(props.store.getState())
-    };
+    const stateString = stateToString(props.store.getState());
+    const { store } = props;
     this.handleActionSelect = this.handleActionSelect.bind(this);
     this.handleServiceSelect = this.handleServiceSelect.bind(this);
-    props.store.subscribe(state => this.setState({ stateString: stateToString(props.store.getState()) }));
+    this.state = { activeService, activeAction, stateString };
+    store.subscribe(() => this.setState({ stateString: stateToString(store.getState()) }));
   }
 
   handleActionSelect(event) {
@@ -31,35 +30,56 @@ export class ReduxServiceDemo extends React.Component {
 
   handleServiceSelect(event) {
     const activeService = event.target.id;
-    const activeAction = Object.keys(this.props.services[activeService].types)[0];
+    const { services } = this.props;
+    const activeAction = Object.keys(services[activeService].types)[0];
     this.setState({ activeService, activeAction });
   }
 
   render() {
+    const { services, store } = this.props;
+    const { activeService, activeAction, stateString } = this.state;
+    const { handleServiceSelect, handleActionSelect } = this;
     return (
       <section className="section">
         <div className="container">
-          <h1 className="title has-text-centered">{config.title}</h1>
+          <h1 className="title has-text-centered">
+            {config.title}
+          </h1>
           <ServiceTabs
-            services={this.props.services}
-            activeService={this.state.activeService}
-            handleServiceSelect={this.handleServiceSelect}/>
+            services={services}
+            activeService={activeService}
+            handleServiceSelect={handleServiceSelect}
+          />
           <ActionSelect
-            services={this.props.services}
-            activeService={this.state.activeService}
-            handleActionSelect={this.handleActionSelect}
+            services={services}
+            activeService={activeService}
+            handleActionSelect={handleActionSelect}
           />
           <ActionForm
-            activeService={this.state.activeService}
-            activeAction={this.state.activeAction}
-            services={this.props.services}
-            store={this.props.store}
+            activeService={activeService}
+            activeAction={activeAction}
+            services={services}
+            store={store}
           />
           <StateMonitor
-            stateString={this.state.stateString}
+            stateString={stateString}
           />
         </div>
       </section>
     );
   }
 }
+
+const servicePropType = PropTypes.shape({
+  types: PropTypes.array.isRequired,
+  actions: PropTypes.array.isRequired,
+  forms: PropTypes.array.isRequired,
+});
+
+ReduxServiceDemo.propTypes = {
+  services: PropTypes.shape({ servicePropType }).isRequired,
+  store: PropTypes.shape({
+    getState: PropTypes.func.isRequired,
+    subscribe: PropTypes.func.isRequired,
+  }).isRequired,
+};

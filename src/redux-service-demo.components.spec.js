@@ -1,30 +1,6 @@
 import { shallow } from 'enzyme';
 import * as components from './redux-service-demo.components';
-
-const services = {
-  serviceA: {
-    types: {
-      typeA: 'typeA',
-      typeB: 'typeB',
-    },
-    forms: {
-      typeA: ['fieldA', 'fieldB'],
-      typeB: ['fieldC', 'fieldD'],
-    },
-  },
-  serviceB: {
-    types: {
-      typeD: 'typeD',
-      typeE: 'typeE',
-      typeF: 'typeF',
-    },
-    forms: {
-      typeD: ['fieldG', 'fieldH'],
-      typeE: ['fieldI', 'fieldJ'],
-      typeF: ['fieldK', 'fieldL'],
-    },
-  },
-};
+import services from './example-services';
 
 test('will render an action option select control', () => {
   const wrapper = shallow(components.renderActionOption('theOption'));
@@ -36,6 +12,12 @@ test('will render an action option select control', () => {
 test('the state monitor function will display the active state', () => {
   const wrapper = shallow(components.StateMonitor({ stateString: 'theState' }));
   expect(wrapper.text()).toEqual('theState');
+});
+
+test('stateToString should convert state to a string', () => {
+  const testState = { foo: 'bar' };
+  const expected = JSON.stringify(testState, null, 2);
+  expect(components.stateToString(testState)).toEqual(expected);
 });
 
 describe('the ActionSelect function', () => {

@@ -1,4 +1,12 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
+
+
+export const servicePropType = PropTypes.shape({
+  types: PropTypes.array.isRequired,
+  actions: PropTypes.array.isRequired,
+  forms: PropTypes.array.isRequired,
+});
 
 export function renderActionOption(optionName) {
   return (
@@ -12,7 +20,15 @@ export function renderTab(serviceName, activeService, handleServiceSelect) {
   const activeClass = activeService === serviceName ? 'is-active' : '';
   return (
     <li key={serviceName} className={activeClass}>
-      <a id={serviceName} onClick={handleServiceSelect}>{serviceName}</a>
+      <a
+        id={serviceName}
+        onClick={handleServiceSelect}
+        onKeyPress={handleServiceSelect}
+        role="button"
+        tabIndex="-1"
+      >
+        {serviceName}
+      </a>
     </li>
   );
 }
@@ -26,7 +42,12 @@ export const ServiceTabs = ({ services, activeService, handleServiceSelect }) =>
       </ul>
     </div>
   );
-}
+};
+ServiceTabs.propTypes = {
+  services: PropTypes.shape({ servicePropType }).isRequired,
+  activeService: PropTypes.string.isRequired,
+  handleServiceSelect: PropTypes.func.isRequired,
+};
 
 export const ActionSelect = ({ services, activeService, handleActionSelect }) => {
   const allActions = Object.keys(services[activeService].types);
@@ -39,14 +60,25 @@ export const ActionSelect = ({ services, activeService, handleActionSelect }) =>
       </div>
     </div>
   );
-}
+};
+ActionSelect.propTypes = {
+  services: PropTypes.shape({ servicePropType }).isRequired,
+  activeService: PropTypes.string.isRequired,
+  handleActionSelect: PropTypes.func.isRequired,
+};
 
-export const StateMonitor = ({ stateString })=> {
-  return (
-    <div>
-      <pre className="state">{ stateString }</pre>
-    </div>
-  );
-}
+export const StateMonitor = ({ stateString }) => (
+  <div>
+    <pre className="state">
+      {stateString}
+    </pre>
+  </div>
+);
+StateMonitor.propTypes = {
+  stateString: PropTypes.string,
+};
+StateMonitor.defaultProps = {
+  stateString: '',
+};
 
 export const stateToString = state => JSON.stringify(state, null, 2);
