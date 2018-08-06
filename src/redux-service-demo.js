@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { ActionForm } from './action-form';
+import ActionForm from './action-form';
 import { config } from './config';
 import {
   ServiceTabs,
