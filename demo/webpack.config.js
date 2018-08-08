@@ -3,6 +3,7 @@ const path = require('path');
 //output path
 const filename = './dist/index.js';
 const outpath = __dirname;
+const mode = 'development';
 
 const rules = [
   { test: /\.jsx?$/, use: [{ loader: 'babel-loader' }] },
@@ -10,8 +11,7 @@ const rules = [
 ];
 
 module.exports = env => {
-  const entry = env && env.content === 'demo' ? path.join(__dirname, 'demo/index') : path.join(__dirname, 'src/index');
-  const mode = env && env.content === 'demo' ? 'development' : 'production';
+  const entry = path.join(__dirname, 'index');
   return {
     module: { rules },
     mode,

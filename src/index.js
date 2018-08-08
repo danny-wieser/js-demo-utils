@@ -3,7 +3,6 @@ import * as React from 'react';
 import ReduxServiceDemo from './redux-service-demo';
 import { initializeDemoStore } from './redux-utils';
 import { configure, config } from './config';
-import './index.scss';
 
 const renderDemo = (state, services, container) => {
   const store = initializeDemoStore(state);

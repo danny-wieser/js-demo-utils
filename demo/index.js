@@ -2,6 +2,7 @@
 import { configure, renderDemo } from '../src';
 import * as todos from './todos-service';
 import * as anotherService from './another-service';
+import '../src/index.scss';
 
 configure({
   useLogger: true,
