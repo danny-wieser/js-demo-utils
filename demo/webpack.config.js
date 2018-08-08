@@ -1,6 +1,5 @@
 const path = require('path');
 
-//output path
 const filename = './dist/index.js';
 const outpath = __dirname;
 const mode = 'development';
@@ -10,7 +9,7 @@ const rules = [
   { test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
 ];
 
-module.exports = env => {
+module.exports = () => {
   const entry = path.join(__dirname, 'index');
   return {
     module: { rules },
@@ -18,5 +17,5 @@ module.exports = env => {
     output: { filename, path: outpath },
     entry,
     resolve: { extensions: ['.js', '.jsx'] },
-  }
+  };
 };
