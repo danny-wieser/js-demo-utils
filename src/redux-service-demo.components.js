@@ -1,7 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-
 export const servicePropType = PropTypes.shape({
   types: PropTypes.array.isRequired,
   actions: PropTypes.array.isRequired,

@@ -5,7 +5,8 @@ import * as components from './action-form.components';
 export default class ActionForm extends React.Component {
   constructor(props) {
     super(props);
-    const formFields = components.getActiveActionForm(props);
+    const formFields = components.getActiveActionForm(props.services,
+      props.activeService, props.activeAction);
     this.state = {
       formFields,
       fieldValues: {},

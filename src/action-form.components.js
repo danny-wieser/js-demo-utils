@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-export function getActiveActionForm({ services, activeService, activeAction }) {
+export function getActiveActionForm(services, activeService, activeAction) {
   return activeService && activeAction ? services[activeService].forms[activeAction] : [];
 }
 

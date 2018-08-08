@@ -1,10 +1,13 @@
+import * as ReactDOM from 'react-dom';
+import * as React from 'react';
 import ReduxServiceDemo from './redux-service-demo';
-import * as redux from './redux';
+import { initializeDemoStore } from './redux-utils';
 import { configure, config } from './config';
+import './index.scss';
 
-export { ReduxServiceDemo, configure, config };
+const renderDemo = (state, services, container) => {
+  const store = initializeDemoStore(state);
+  ReactDOM.render(<ReduxServiceDemo services={services} store={store} />, container);
+};
 
-export const {
-  initializeDemoStore,
-  allTypesForServices,
-} = redux;
+export { renderDemo, configure, config };

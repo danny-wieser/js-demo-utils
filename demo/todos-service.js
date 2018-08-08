@@ -5,7 +5,7 @@ import {
   ok,
   fail,
   createReducer,
-} from '../src/redux';
+} from '../src/redux-utils';
 
 // an example redux data service using the todos api here: http://jsonplaceholder.typicode.com/
 const todosPath = 'https://jsonplaceholder.typicode.com/todos';
@@ -57,33 +57,21 @@ export const actions = {
   addTodo,
 };
 
-export const INITIAL_STATE = {};
+export const INITIAL_STATE = { isLoading: false };
 
-function fetchTodoByIdLoading(state) {
-  return { ...state, isLoading: true };
-}
-
+export const fetchTodoByIdLoading = state => ({ ...state, isLoading: true });
 function fetchTodoByIdOK(state, action) {
   const { id } = action.payload;
   return { ...state, isLoading: false, [id]: { ...action.payload } };
 }
+export const fetchTodoByIdFail = state => ({ ...state, isLoading: false, hasError: true });
 
-function fetchTodoByIdFail(state) {
-  return { ...state, isLoading: false, hasError: true };
-}
-
-function addTodoLoading(state) {
-  return { ...state, isLoading: true };
-}
-
+export const addTodoLoading = state => ({ ...state, isLoading: true });
 function addTodoOK(state, action) {
   const { id } = action.payload;
   return { ...state, isLoading: false, [id]: { ...action.payload } };
 }
-
-function addTodoFail(state) {
-  return { ...state, isLoading: false, hasError: true };
-}
+export const addTodoFail = state => ({ ...state, isLoading: false, hasError: true });
 
 export const reducer = createReducer(INITIAL_STATE, {
   [types.fetchTodoById]: (state, action) => fetchTodoByIdLoading(state, action),
