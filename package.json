@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf dist coverage yarn-error.log",
-    "build": "yarn run clean && babel src --out-dir dist && yarn run css-build",
+    "build": "yarn run clean && babel src --out-dir dist --ignore '**/*.spec.js' && yarn run css-build",
     "docs": "jsdoc src/*.js",
     "test": "jest --coverage --collectCoverageFrom=src/** && yarn run lint",
     "demo": "webpack-serve --config demo/webpack.config.js --content demo",
