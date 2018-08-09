@@ -1,6 +1,6 @@
 const path = require('path');
 
-const filename = './dist/index.js';
+const filename = './dist/app.js';
 const outpath = __dirname;
 const mode = 'development';
 

@@ -15,4 +15,4 @@ This demo application allows testing of each individual Redux Service in a simpl
 
 ## Usage
 
-`npm install redux-service-demo`
+`yarn install redux-service-demo`

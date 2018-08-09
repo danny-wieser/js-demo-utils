@@ -6,14 +6,17 @@
   "repository": "git@github.com:danny-wieser/js-demo-utils.git",
   "author": "<danny.wieser@gmail.com>",
   "license": "MIT",
+  "homepage": "https://danny-wieser.github.io/redux-service-demo/",
   "scripts": {
-    "clean": "rimraf dist coverage yarn-error.log",
+    "clean": "rimraf dist coverage yarn-error.log demo/dist",
     "build": "yarn run clean && babel src --out-dir dist --ignore '**/*.spec.js' && yarn run css-build",
     "docs": "jsdoc src/*.js",
     "test": "jest --coverage --collectCoverageFrom=src/** && yarn run lint",
     "demo": "webpack-serve --config demo/webpack.config.js --content demo",
     "lint": "eslint .",
-    "css-build": "node-sass --omit-source-map-url src/index.scss styles/index.css"
+    "css-build": "node-sass --omit-source-map-url src/index.scss styles/index.css",
+    "predeploy": "yarn run clean && webpack --config demo/webpack.config.js --mode=production",
+    "deploy": "gh-pages -d demo"
   },
   "files": [
     "dist/**/*.*",
@@ -48,6 +51,7 @@
     "eslint-plugin-jest": "^21.18.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
+    "gh-pages": "^1.2.0",
     "jest": "^23.4.1",
     "node-sass": "^4.9.2",
     "rimraf": "^2.6.2",
