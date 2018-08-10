@@ -9,13 +9,9 @@ configure({
   title: 'Redux Service Demo',
 });
 
-const state = {
-  todos: todos.reducer,
-  anotherService: anotherService.reducer,
-};
-
 const services = {
   todos: {
+    reducer: todos.reducer,
     types: todos.types,
     actions: todos.actions,
     forms: {
@@ -24,6 +20,7 @@ const services = {
     },
   },
   anotherService: {
+    reducer: anotherService.reducer,
     types: anotherService.types,
     actions: anotherService.actions,
     forms: {
@@ -32,4 +29,4 @@ const services = {
   },
 };
 
-renderDemo(state, services, document.getElementById('container'));
+renderDemo(services, document.getElementById('container'));

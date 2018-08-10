@@ -4,8 +4,8 @@ import ReduxServiceDemo from './redux-service-demo';
 import { initializeDemoStore } from './redux-utils';
 import { configure, config } from './config';
 
-const renderDemo = (state, services, container) => {
-  const store = initializeDemoStore(state);
+const renderDemo = (services, container) => {
+  const store = initializeDemoStore(services);
   ReactDOM.render(<ReduxServiceDemo services={services} store={store} />, container);
 };
 

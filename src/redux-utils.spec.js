@@ -7,6 +7,7 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import * as utils from './redux-utils';
 import { configure } from './config';
+import services from './example-services';
 
 jest.mock('redux', () => ({
   createStore: jest.fn(),
@@ -20,24 +21,23 @@ beforeEach(() => {
   applyMiddleware.mockClear();
 });
 
-test('creates a redux store with logging enabled using the provided state', () => {
-  const state = { a: {}, b: {} };
-  configure({
-    useLogger: true,
-  });
-  utils.initializeDemoStore(state);
-  expect(combineReducers.mock.calls[0][0]).toEqual(state);
+const expectedReducers = {
+  serviceA: services.serviceA.reducer,
+  serviceB: services.serviceB.reducer,
+};
+
+test('creates a redux store with logging enabled using the provided services object', () => {
+  configure({ useLogger: true });
+  utils.initializeDemoStore(services);
+  expect(combineReducers.mock.calls[0][0]).toEqual(expectedReducers);
   expect(applyMiddleware.mock.calls[0][0]).toEqual(thunk, logger);
   expect(createStore.mock.calls).toHaveLength(1);
 });
 
 test('creates a redux store with logging disabled using the provided state', () => {
-  const state = { a: {}, b: {} };
-  configure({
-    useLogger: false,
-  });
-  utils.initializeDemoStore(state);
-  expect(combineReducers.mock.calls[0][0]).toEqual(state);
+  configure({ useLogger: false });
+  utils.initializeDemoStore(services);
+  expect(combineReducers.mock.calls[0][0]).toEqual(expectedReducers);
   expect(applyMiddleware.mock.calls[0][0]).toEqual(thunk);
   expect(createStore.mock.calls).toHaveLength(1);
 });

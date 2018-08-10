@@ -7,13 +7,15 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import { config } from './config';
 
-export function initializeDemoStore(state) {
-  const allReducers = combineReducers(state);
+export function initializeDemoStore(services) {
+  const servicesReducer = (state, service) => ({ ...state, [service]: services[service].reducer });
+  const allServiceReducers = Object.keys(services).reduce(servicesReducer, {});
+  const combinedReducers = combineReducers(allServiceReducers);
   const middlewares = [thunk];
   if (config.useLogger) {
     middlewares.push(logger);
   }
-  return createStore(allReducers, applyMiddleware(...middlewares));
+  return createStore(combinedReducers, applyMiddleware(...middlewares));
 }
 
 const OK = 'ok';
