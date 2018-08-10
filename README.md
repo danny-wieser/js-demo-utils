@@ -3,6 +3,8 @@ A React UI for testing Redux Service components without the need to integrate th
 
 [![Build Status](https://travis-ci.org/danny-wieser/redux-service-demo.svg?branch=master)](https://travis-ci.org/danny-wieser/redux-service-demo)
 
+See the demo here: https://danny-wieser.github.io/redux-service-demo/
+
 ## Overview
 
 A Redux Data Service is a Redux wrapper for an API that maps API functionality to Redux Actions.

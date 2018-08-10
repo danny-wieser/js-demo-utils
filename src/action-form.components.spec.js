@@ -7,6 +7,15 @@ test('returns the correct active action form fields, given a service object, ser
   expect(result).toEqual(['fieldC', 'fieldD']);
 });
 
+test('provides a state object with default field values, given an array of fields', () => {
+  const result = components.getDefaultFormValues(['fieldA', 'fieldB', 'fieldC']);
+  expect(result).toEqual({
+    fieldA: '',
+    fieldB: '',
+    fieldC: '',
+  });
+});
+
 test('returns a blank array of fields, given an undefined service name and type', () => {
   const result = components.getActiveActionForm(services, undefined, undefined);
   expect(result).toEqual([]);
@@ -17,7 +26,7 @@ describe('rendering a form input field', () => {
   let updateFunction;
   beforeEach(() => {
     updateFunction = jest.fn();
-    wrapper = shallow(components.renderFormInput('fieldName', updateFunction));
+    wrapper = shallow(components.formInput('fieldName', 'fieldVal', updateFunction));
   });
 
   test('adds a key of the field name', () => {
@@ -30,6 +39,10 @@ describe('rendering a form input field', () => {
 
   test('sets the input placeholder to the field name', () => {
     expect(wrapper.find('input').prop('placeholder')).toBe('fieldName');
+  });
+
+  test('sets the value of the field', () => {
+    expect(wrapper.find('input').props().value).toBe('fieldVal');
   });
 
   test('sets the the update function as the onChange handler', () => {

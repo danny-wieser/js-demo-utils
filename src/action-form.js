@@ -7,17 +7,28 @@ export default class ActionForm extends React.Component {
     super(props);
     const formFields = components.getActiveActionForm(props.services,
       props.activeService, props.activeAction);
+    const formValues = components.getDefaultFormValues(formFields);
     this.state = {
       formFields,
-      fieldValues: {},
+      formValues,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.updateFieldValue = this.updateFieldValue.bind(this);
+    this.fieldChange = this.handleFieldUpdate.bind(this);
   }
 
   componentWillReceiveProps({ services, activeService, activeAction }) {
     const formFields = components.getActiveActionForm(services, activeService, activeAction);
-    this.setState({ formFields });
+    const formValues = components.getDefaultFormValues(formFields);
+    this.setState({ formFields, formValues });
+  }
+
+  handleFieldUpdate(event) {
+    const { formValues } = this.state;
+    const updatedFormValues = {
+      ...formValues,
+      [event.target.id]: event.target.value,
+    };
+    this.setState({ formValues: updatedFormValues });
   }
 
   handleSubmit() {
@@ -27,29 +38,21 @@ export default class ActionForm extends React.Component {
       activeAction,
       store,
     } = this.props;
-    const { fieldValues } = this.state;
+    const { formFields, formValues } = this.state;
     const service = services[activeService];
     const actionDispatch = service.actions[activeAction];
-    const fieldVals = Object.values(fieldValues);
-    store.dispatch(actionDispatch(...fieldVals));
-    this.setState({ fieldValues: {} });
-  }
-
-  updateFieldValue(event) {
-    const fieldName = event.target.id;
-    const fieldVal = event.target.value;
-    const { fieldValues } = this.state;
-    this.setState({ fieldValues: { ...fieldValues, [fieldName]: fieldVal } });
+    const params = Object.values(formValues);
+    store.dispatch(actionDispatch(...params));
+    const resetFormValues = components.getDefaultFormValues(formFields);
+    this.setState({ formValues: resetFormValues });
   }
 
   render() {
-    const { formFields } = this.state;
+    const { formFields, formValues } = this.state;
     return (
       <div>
-        {formFields.map(item => components.renderFormInput(item, this.updateFieldValue))}
-        <components.ActionSubmitButton
-          handleSubmit={this.handleSubmit}
-        />
+        {formFields.map(field => components.formInput(field, formValues[field], this.fieldChange))}
+        <components.ActionSubmitButton handleSubmit={this.handleSubmit} />
       </div>
     );
   }

@@ -2,18 +2,20 @@ import * as React from 'react';
 import { mount } from 'enzyme';
 import ActionForm from './action-form';
 import services from './example-services';
-import { getActiveActionForm } from './action-form.components';
+import { getActiveActionForm, getDefaultFormValues } from './action-form.components';
 
 jest.mock('./action-form.components', () => ({
   ActionSubmitButton: () => null,
-  renderFormInput: () => null,
+  formInput: () => null,
   getActiveActionForm: jest.fn(),
+  getDefaultFormValues: jest.fn(),
 }));
 
 describe('the ActionForm class', () => {
   let store;
   let wrapper;
   getActiveActionForm.mockReturnValue(['firstField', 'secondField']);
+  getDefaultFormValues.mockReturnValue({ firstField: '', secondField: '' });
   beforeEach(() => {
     store = {
       dispatch: jest.fn(),
@@ -39,22 +41,22 @@ describe('the ActionForm class', () => {
     expect(wrapper.state().formFields).toEqual(['newFieldOne', 'newFieldTwo']);
   });
 
-  test('will update the state field values on a call to updateFieldValue', () => {
-    expect(wrapper.state().fieldValues.firstField).toBeUndefined();
+  test('will update the state field values on a call to handleFieldUpdate', () => {
+    expect(wrapper.state().formValues.firstField).toBe('');
     const changeEventOne = { target: { id: 'firstField', value: 'changedValue' } };
-    wrapper.instance().updateFieldValue(changeEventOne);
+    wrapper.instance().handleFieldUpdate(changeEventOne);
 
     const changeEventTwo = { target: { id: 'secondField', value: 'AnotherChangedValue' } };
-    wrapper.instance().updateFieldValue(changeEventTwo);
+    wrapper.instance().handleFieldUpdate(changeEventTwo);
 
-    expect(wrapper.state().fieldValues.firstField).toEqual('changedValue');
-    expect(wrapper.state().fieldValues.secondField).toEqual('AnotherChangedValue');
+    expect(wrapper.state().formValues.firstField).toEqual('changedValue');
+    expect(wrapper.state().formValues.secondField).toEqual('AnotherChangedValue');
   });
 
   describe('on a call to handleSubmit', () => {
     beforeEach(() => {
       services.serviceA.actions = { typeD: jest.fn() };
-      wrapper.setState({ fieldValues: { firstField: 'value1', secondField: 'value2' } });
+      wrapper.setState({ formValues: { firstField: 'value1', secondField: 'value2' } });
       wrapper.instance().handleSubmit();
     });
 
@@ -64,8 +66,11 @@ describe('the ActionForm class', () => {
       expect(services.serviceA.actions.typeD.mock.calls[0][0]).toEqual('value1');
     });
 
-    test('will reset state field values', () => {
-      expect(wrapper.state().fieldValues).toEqual({});
+    test('will reset state field values to defaults', () => {
+      expect(wrapper.state().formValues).toEqual({
+        firstField: '',
+        secondField: '',
+      });
     });
   });
 });

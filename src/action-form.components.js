@@ -1,11 +1,15 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
+export function getDefaultFormValues(fieldNames) {
+  return fieldNames.reduce((valueObj, fieldName) => ({ ...valueObj, [fieldName]: '' }), {});
+}
+
 export function getActiveActionForm(services, activeService, activeAction) {
   return activeService && activeAction ? services[activeService].forms[activeAction] : [];
 }
 
-export function renderFormInput(fieldName, updateFieldValue) {
+export function formInput(fieldName, fieldValue, handleFieldUpdate) {
   return (
     <div className="field" key={fieldName}>
       <div className="control">
@@ -13,8 +17,9 @@ export function renderFormInput(fieldName, updateFieldValue) {
           className="input is-medium"
           id={fieldName}
           type="text"
-          onChange={updateFieldValue}
+          value={fieldValue}
           placeholder={fieldName}
+          onChange={handleFieldUpdate}
         />
       </div>
     </div>
@@ -28,7 +33,7 @@ export function ActionSubmitButton({ handleSubmit }) {
       className="button is-primary is-medium is-fullwidth"
       type="button"
     >
-      submit
+      dispatch
     </button>
   );
 }
