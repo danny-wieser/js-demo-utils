@@ -1,4 +1,4 @@
-import { Action, createReducer } from '../src/redux-utils';
+import { ActionSync, createReducer } from 'redux-service-util';
 
 // another non-async redux service, just to demonstrate how the app handles multiple services
 export const types = {
@@ -6,7 +6,7 @@ export const types = {
 };
 
 const someAction = (fieldA, fieldB) => (dispatch) => {
-  dispatch(Action(types.someAction, { payload: { fieldA, fieldB } }));
+  dispatch(ActionSync(types.someAction, { payload: { fieldA, fieldB } }));
 };
 
 export const actions = { someAction };

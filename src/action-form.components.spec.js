@@ -16,8 +16,18 @@ test('provides a state object with default field values, given an array of field
   });
 });
 
+test('getDefaultFormValues handles the case where no form fields are defined', () => {
+  const result = components.getDefaultFormValues(null);
+  expect(result).toEqual({});
+});
+
 test('returns a blank array of fields, given an undefined service name and type', () => {
   const result = components.getActiveActionForm(services, undefined, undefined);
+  expect(result).toEqual([]);
+});
+
+test('returns a blank array of fields, given an defined service name and type with no form definition', () => {
+  const result = components.getActiveActionForm(services, 'serviceB', 'typeF');
   expect(result).toEqual([]);
 });
 

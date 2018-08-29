@@ -26,7 +26,7 @@ Add as a project dependency
 Import the necessary functions (and CSS if desired)
 
 ```javascript
-  import { configure, renderDemo } from 'redux-service-demo';`
+  import { configure, renderDemo } from 'redux-service-demo';
   import 'redux-service-demo/styles/index.css';
 ```
 

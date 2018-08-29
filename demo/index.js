@@ -1,4 +1,5 @@
 /* eslint-env browser */
+import 'babel-polyfill';
 import { configure, renderDemo } from '../src';
 import * as todos from './todos-service';
 import * as anotherService from './another-service';

@@ -2,11 +2,15 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 
 export function getDefaultFormValues(fieldNames) {
+  if (!fieldNames) {
+    return {};
+  }
   return fieldNames.reduce((valueObj, fieldName) => ({ ...valueObj, [fieldName]: '' }), {});
 }
 
 export function getActiveActionForm(services, activeService, activeAction) {
-  return activeService && activeAction ? services[activeService].forms[activeAction] : [];
+  const forms = activeService && activeAction ? services[activeService].forms[activeAction] : [];
+  return forms || [];
 }
 
 export function formInput(fieldName, fieldValue, handleFieldUpdate) {
