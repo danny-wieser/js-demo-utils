@@ -1,3 +1,5 @@
+/* eslint-env browser */
+import 'url-search-params-polyfill';
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import {
@@ -9,6 +11,17 @@ import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import ReduxServiceDemo from './redux-service-demo';
 import { configure, config } from './config';
+
+function getParams() {
+  const searchParams = new URLSearchParams(window.location.search);
+  const params = Array.from(searchParams.entries());
+  const reducer = (allParams, entry) => {
+    const key = entry[0];
+    const value = entry[1];
+    return { ...allParams, [key]: value };
+  };
+  return params.reduce(reducer, {});
+}
 
 function initializeDemoStore(services) {
   const servicesReducer = (state, service) => ({ ...state, [service]: services[service].reducer });
@@ -23,7 +36,12 @@ function initializeDemoStore(services) {
 
 const renderDemo = (services, container) => {
   const demoStore = initializeDemoStore(services);
-  ReactDOM.render(<ReduxServiceDemo services={services} store={demoStore} />, container);
+  const params = getParams();
+  ReactDOM.render(<ReduxServiceDemo
+    services={services}
+    store={demoStore}
+    params={params}
+  />, container);
   return demoStore;
 };
 

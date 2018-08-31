@@ -7,7 +7,7 @@ export default class ActionForm extends React.Component {
     super(props);
     const formFields = components.getActiveActionForm(props.services,
       props.activeService, props.activeAction);
-    const formValues = components.getDefaultFormValues(formFields);
+    const formValues = components.getDefaultFormValues(formFields, props.params);
     this.state = {
       formFields,
       formValues,
@@ -63,6 +63,7 @@ ActionForm.propTypes = {
   store: PropTypes.shape({
     dispatch: PropTypes.func.isRequired,
   }).isRequired,
+  params: PropTypes.object.isRequired,
   activeService: PropTypes.string.isRequired,
   activeAction: PropTypes.string.isRequired,
 };

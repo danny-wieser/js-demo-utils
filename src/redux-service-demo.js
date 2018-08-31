@@ -13,8 +13,10 @@ export default class ReduxServiceDemo extends React.Component {
   constructor(props) {
     super(props);
     const allServices = Object.keys(props.services);
-    const activeService = allServices[0];
-    const activeAction = Object.keys(props.services[activeService].types)[0];
+    // default service/action based on params (if provided)
+    const { action, service } = props.params;
+    const activeService = service || allServices[0];
+    const activeAction = action || Object.keys(props.services[activeService].types)[0];
     const stateString = stateToString(props.store.getState());
     const { store } = props;
     this.handleActionSelect = this.handleActionSelect.bind(this);
@@ -36,7 +38,7 @@ export default class ReduxServiceDemo extends React.Component {
   }
 
   render() {
-    const { services, store } = this.props;
+    const { services, store, params } = this.props;
     const { activeService, activeAction, stateString } = this.state;
     const { handleServiceSelect, handleActionSelect } = this;
     return (
@@ -60,6 +62,7 @@ export default class ReduxServiceDemo extends React.Component {
             activeAction={activeAction}
             services={services}
             store={store}
+            params={params}
           />
           <StateMonitor
             stateString={stateString}
@@ -82,4 +85,5 @@ ReduxServiceDemo.propTypes = {
     getState: PropTypes.func.isRequired,
     subscribe: PropTypes.func.isRequired,
   }).isRequired,
+  params: PropTypes.object.isRequired,
 };

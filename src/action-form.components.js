@@ -1,11 +1,15 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-export function getDefaultFormValues(fieldNames) {
+export function getDefaultFormValues(fieldNames, params) {
   if (!fieldNames) {
     return {};
   }
-  return fieldNames.reduce((valueObj, fieldName) => ({ ...valueObj, [fieldName]: '' }), {});
+  const formValueReducer = (valueObj, fieldName) => {
+    const fieldValue = params && params[fieldName] ? params[fieldName] : '';
+    return { ...valueObj, [fieldName]: fieldValue };
+  };
+  return fieldNames.reduce(formValueReducer, {});
 }
 
 export function getActiveActionForm(services, activeService, activeAction) {

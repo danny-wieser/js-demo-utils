@@ -14,6 +14,7 @@ jest.mock('./action-form.components', () => ({
 describe('the ActionForm class', () => {
   let store;
   let wrapper;
+  let params;
   getActiveActionForm.mockReturnValue(['firstField', 'secondField']);
   getDefaultFormValues.mockReturnValue({ firstField: '', secondField: '' });
   beforeEach(() => {
@@ -21,10 +22,12 @@ describe('the ActionForm class', () => {
       dispatch: jest.fn(),
       getState: jest.fn(),
     };
+    params = {};
     wrapper = mount(
       <ActionForm
         services={services}
         store={store}
+        params={params}
         activeService="serviceA"
         activeAction="typeD"
       />,

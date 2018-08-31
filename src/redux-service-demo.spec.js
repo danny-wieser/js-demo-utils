@@ -14,21 +14,28 @@ jest.mock('./config', () => ({
   config: { title: 'mocked title' },
 }));
 
+let store;
+let subscribeCallback;
+
+beforeEach(() => {
+  store = {
+    getState: jest.fn(),
+    subscribe: jest.fn((callback) => {
+      subscribeCallback = callback;
+    }),
+  };
+});
+
 describe('the ReduxServiceDemo class', () => {
-  let store;
   let wrapper;
-  let subscribeCallback;
+  let params;
   beforeEach(() => {
-    store = {
-      getState: jest.fn(),
-      subscribe: jest.fn((callback) => {
-        subscribeCallback = callback;
-      }),
-    };
+    params = {};
     wrapper = mount(
       <ReduxServiceDemo
         services={services}
         store={store}
+        params={params}
       />,
     );
   });
@@ -56,5 +63,33 @@ describe('the ReduxServiceDemo class', () => {
   test('should update the state string on subscribe callback', () => {
     subscribeCallback();
     expect(wrapper.state().stateString).toBe('stateToStringMock');
+  });
+});
+
+describe('parameter overrides for default values', () => {
+  test('defaults service based on parameter provided with a key of service', () => {
+    const params = { service: 'serviceB' };
+    const wrapper = mount(
+      <ReduxServiceDemo
+        services={services}
+        store={store}
+        params={params}
+      />,
+    );
+    expect(wrapper.state().activeService).toBe('serviceB');
+    expect(wrapper.state().activeAction).toBe('typeD');
+  });
+
+  test('defaults service/action based on parameter provided with a key of service/action', () => {
+    const params = { service: 'serviceB', action: 'typeF' };
+    const wrapper = mount(
+      <ReduxServiceDemo
+        services={services}
+        store={store}
+        params={params}
+      />,
+    );
+    expect(wrapper.state().activeService).toBe('serviceB');
+    expect(wrapper.state().activeAction).toBe('typeF');
   });
 });
