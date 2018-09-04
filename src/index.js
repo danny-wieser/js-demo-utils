@@ -12,9 +12,9 @@ import logger from 'redux-logger';
 import ReduxServiceDemo from './redux-service-demo';
 import { configure, config } from './config';
 
-function getParams() {
-  const searchParams = new URLSearchParams(window.location.search);
-  const params = Array.from(searchParams.entries());
+export const searchParams = () => new URLSearchParams(window.location.search).entries();
+export function getParams() {
+  const params = Array.from(searchParams());
   const reducer = (allParams, entry) => {
     const key = entry[0];
     const value = entry[1];

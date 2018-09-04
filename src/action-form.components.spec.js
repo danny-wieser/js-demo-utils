@@ -16,6 +16,17 @@ test('provides a state object with default field values, given an array of field
   });
 });
 
+test('provides a state object populated with field values; if provided', () => {
+  const result = components.getDefaultFormValues(['fieldA', 'fieldB', 'fieldC'], {
+    fieldA: 'defaultA', fieldB: 'defaultB',
+  });
+  expect(result).toEqual({
+    fieldA: 'defaultA',
+    fieldB: 'defaultB',
+    fieldC: '',
+  });
+});
+
 test('getDefaultFormValues handles the case where no form fields are defined', () => {
   const result = components.getDefaultFormValues(null);
   expect(result).toEqual({});
