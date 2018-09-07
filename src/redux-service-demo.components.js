@@ -48,13 +48,18 @@ ServiceTabs.propTypes = {
   handleServiceSelect: PropTypes.func.isRequired,
 };
 
-export const ActionSelect = ({ services, activeService, handleActionSelect }) => {
+export const ActionSelect = ({
+  services,
+  activeService,
+  activeAction,
+  handleActionSelect,
+}) => {
   const allActions = Object.keys(services[activeService].types);
   return (
     <div className="field">
       <div className="select is-fullwidth is-medium">
-        <select id="action-select" onChange={handleActionSelect}>
-          { allActions.map(item => renderActionOption(item)) }
+        <select id="action-select" onChange={handleActionSelect} value={activeAction}>
+          { allActions.map(item => renderActionOption(item, activeAction)) }
         </select>
       </div>
     </div>
@@ -63,6 +68,7 @@ export const ActionSelect = ({ services, activeService, handleActionSelect }) =>
 ActionSelect.propTypes = {
   services: PropTypes.shape({ servicePropType }).isRequired,
   activeService: PropTypes.string.isRequired,
+  activeAction: PropTypes.string.isRequired,
   handleActionSelect: PropTypes.func.isRequired,
 };
 

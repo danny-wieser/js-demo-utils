@@ -54,6 +54,7 @@ export default class ReduxServiceDemo extends React.Component {
           />
           <ActionSelect
             services={services}
+            activeAction={activeAction}
             activeService={activeService}
             handleActionSelect={handleActionSelect}
           />

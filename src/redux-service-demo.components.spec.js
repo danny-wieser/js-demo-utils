@@ -23,7 +23,13 @@ test('stateToString should convert state to a string', () => {
 describe('the ActionSelect function', () => {
   const handleActionSelect = jest.fn();
   const activeService = 'serviceB';
-  const params = { services, activeService, handleActionSelect };
+  const activeAction = 'typeE';
+  const params = {
+    services,
+    activeService,
+    activeAction,
+    handleActionSelect,
+  };
   let wrapper;
 
   beforeEach(() => {
@@ -35,6 +41,11 @@ describe('the ActionSelect function', () => {
     expect(wrapper.find('option').at(0).text()).toBe('typeD');
     expect(wrapper.find('option').at(1).text()).toBe('typeE');
     expect(wrapper.find('option').at(2).text()).toBe('typeF');
+  });
+
+  test('sets the default value of the select control', () => {
+    const select = wrapper.find('select');
+    expect(select.prop('value')).toEqual('typeE');
   });
 
   test('will trigger the handler function on change of the selection', () => {

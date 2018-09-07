@@ -7,6 +7,8 @@ See the demo here: https://danny-wieser.github.io/redux-service-demo/
 
 Demo uses the fake todos api available here: http://jsonplaceholder.typicode.com/
 
+Demo also uses the redux-service-utils from here to reduce boilerplate in the async service code: https://github.com/danny-wieser/redux-service-util
+
 ## Overview
 
 A Redux Data Service is a Redux wrapper for an API that maps API functionality to Redux Actions.
@@ -44,6 +46,20 @@ Define your services object (see below) and pass it to the renderDemo function, 
 ```javascript
 renderDemo(services, document.getElementById('container'));
 ```
+
+Configure your services as needed and load the application in a browser, then start testing your services!
+
+You can default to a particular service/action by providing parameters in the url:
+
+```
+?service=todos&action=fetchTodoById
+```
+
+You can also set a default value for any field by setting a url parameter with the field name:
+```
+&userId=1&title=atitle
+```
+
 ## Services Object
 
 A Redux Data Service/State would typically consist of:
