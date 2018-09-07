@@ -1,6 +1,6 @@
 {
   "name": "redux-service-demo",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A simple React UI for testing Redux-based data services",
   "main": "dist/index.js",
   "repository": "git@github.com:danny-wieser/js-demo-utils.git",
