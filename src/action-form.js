@@ -16,9 +16,14 @@ export default class ActionForm extends React.Component {
     this.fieldChange = this.handleFieldUpdate.bind(this);
   }
 
-  componentWillReceiveProps({ services, activeService, activeAction }) {
+  componentWillReceiveProps({
+    services,
+    activeService,
+    activeAction,
+    params,
+  }) {
     const formFields = components.getActiveActionForm(services, activeService, activeAction);
-    const formValues = components.getDefaultFormValues(formFields);
+    const formValues = components.getDefaultFormValues(formFields, params);
     this.setState({ formFields, formValues });
   }
 
