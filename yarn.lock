@@ -5937,6 +5937,21 @@ redux-logger@^3.0.6:
   dependencies:
     deep-diff "^0.3.5"
 
+redux-service-demo@1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/redux-service-demo/-/redux-service-demo-1.0.11.tgz#50ab39b2953080eae1196d2f538f617aa356fd67"
+  dependencies:
+    babel-polyfill "^6.26.0"
+    bulma "^0.7.1"
+    prop-types "^15.6.2"
+    react "^16.4.1"
+    react-dom "^16.4.1"
+    redux "^4.0.0"
+    redux-logger "^3.0.6"
+    redux-service-util "1.0.7"
+    redux-thunk "^2.3.0"
+    url-search-params-polyfill "^4.0.1"
+
 redux-service-util@1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/redux-service-util/-/redux-service-util-1.0.7.tgz#3fbbef80d28e3790ac5db0541e78a189b337fbb2"
