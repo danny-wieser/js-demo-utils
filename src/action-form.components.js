@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { fieldValueForDisplay } from './util';
 
 export function getDefaultFormValues(fieldNames, params) {
   if (!fieldNames) {
@@ -18,6 +19,7 @@ export function getActiveActionForm(services, activeService, activeAction) {
 }
 
 export function formInput(fieldName, fieldValue, handleFieldUpdate) {
+  const displayFieldValue = fieldValueForDisplay(fieldValue);
   return (
     <div className="field" key={fieldName}>
       <div className="control">
@@ -25,7 +27,7 @@ export function formInput(fieldName, fieldValue, handleFieldUpdate) {
           className="input is-medium"
           id={fieldName}
           type="text"
-          value={fieldValue}
+          value={displayFieldValue}
           placeholder={fieldName}
           onChange={handleFieldUpdate}
         />

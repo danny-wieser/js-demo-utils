@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import * as components from './action-form.components';
+import { parseFieldValue } from './util';
 
 export default class ActionForm extends React.Component {
   constructor(props) {
@@ -29,9 +30,10 @@ export default class ActionForm extends React.Component {
 
   handleFieldUpdate(event) {
     const { formValues } = this.state;
+    const fieldValue = parseFieldValue(event.target.value);
     const updatedFormValues = {
       ...formValues,
-      [event.target.id]: event.target.value,
+      [event.target.id]: fieldValue,
     };
     this.setState({ formValues: updatedFormValues });
   }
@@ -47,6 +49,7 @@ export default class ActionForm extends React.Component {
     const service = services[activeService];
     const actionDispatch = service.actions[activeAction];
     const params = Object.values(formValues);
+    // TODO: add logging here!
     store.dispatch(actionDispatch(...params));
     const resetFormValues = components.getDefaultFormValues(formFields);
     this.setState({ formValues: resetFormValues });
