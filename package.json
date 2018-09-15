@@ -1,6 +1,6 @@
 {
   "name": "redux-service-demo",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "A simple React UI for testing Redux-based data services",
   "main": "dist/index.js",
   "repository": "git@github.com:danny-wieser/js-demo-utils.git",
@@ -9,13 +9,13 @@
   "homepage": "https://danny-wieser.github.io/redux-service-demo/",
   "scripts": {
     "clean": "rimraf dist coverage yarn-error.log demo/dist",
-    "build": "yarn run clean && babel src --out-dir dist --ignore '**/*.spec.js' && yarn run css-build",
+    "build": "babel src --out-dir dist --ignore '**/*.spec.js' && yarn run css-build",
     "start": "yarn run clean && babel src --out-dir dist --ignore '**/*.spec.js' --watch",
     "test": "jest --coverage --collectCoverageFrom=src/** && yarn run lint",
     "demo": "webpack-serve --config demo/webpack.config.js --content demo",
     "lint": "eslint .",
     "css-build": "node-sass --omit-source-map-url src/index.scss styles/index.css",
-    "predeploy": "yarn run clean && webpack --config demo/webpack.config.js --mode=production",
+    "predeploy": "webpack --config demo/webpack.config.js --mode=production",
     "deploy": "gh-pages -d demo"
   },
   "files": [
