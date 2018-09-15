@@ -62,7 +62,6 @@ You can also set a default value for any field by setting a url parameter with t
 
 ## Services Object
 
-
 A Redux Data Service/State would typically consist of:
 * a reducer
 * an enumerated set of types available for the state
