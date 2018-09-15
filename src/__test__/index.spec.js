@@ -6,9 +6,9 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
-import * as reduxDemo from './index';
+import * as reduxDemo from '../index';
 import services from './example-services';
-import { configure } from './config';
+import { configure } from '../config';
 
 jest.mock('react-dom', () => ({
   render: jest.fn(),

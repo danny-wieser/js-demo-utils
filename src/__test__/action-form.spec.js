@@ -1,15 +1,19 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import ActionForm from './action-form';
+import ActionForm from '../action-form';
 import services from './example-services';
-import { getActiveActionForm, getDefaultFormValues } from './action-form.components';
+import { getActiveActionForm, getDefaultFormValues } from '../action-form.components';
 
-jest.mock('./action-form.components', () => ({
+jest.mock('../action-form.components', () => ({
   ActionSubmitButton: () => null,
   formInput: () => null,
   getActiveActionForm: jest.fn(),
   getDefaultFormValues: jest.fn(),
 }));
+
+beforeEach(() => {
+  global.console = { info: jest.fn() };
+});
 
 describe('the ActionForm class', () => {
   let store;
@@ -54,6 +58,14 @@ describe('the ActionForm class', () => {
 
     expect(wrapper.state().formValues.firstField).toEqual('changedValue');
     expect(wrapper.state().formValues.secondField).toEqual('AnotherChangedValue');
+  });
+
+  test('handles the scenario when the value entered in a field can be converted to an object', () => {
+    expect(wrapper.state().formValues.firstField).toBe('');
+    const changeEventOne = { target: { id: 'firstField', value: '{ "foo": "bar" }' } };
+    wrapper.instance().handleFieldUpdate(changeEventOne);
+
+    expect(wrapper.state().formValues.firstField).toEqual({ foo: 'bar' });
   });
 
   describe('on a call to handleSubmit', () => {

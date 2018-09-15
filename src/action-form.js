@@ -49,7 +49,7 @@ export default class ActionForm extends React.Component {
     const service = services[activeService];
     const actionDispatch = service.actions[activeAction];
     const params = Object.values(formValues);
-    // TODO: add logging here!
+    console.info(`handleSubmit|${activeService}|${activeAction}|`, formValues);
     store.dispatch(actionDispatch(...params));
     const resetFormValues = components.getDefaultFormValues(formFields);
     this.setState({ formValues: resetFormValues });

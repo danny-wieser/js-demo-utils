@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { mount } from 'enzyme';
-import ReduxServiceDemo from './redux-service-demo';
+import ReduxServiceDemo from '../redux-service-demo';
 import services from './example-services';
 
-jest.mock('./action-form');
-jest.mock('./redux-service-demo.components', () => ({
+jest.mock('../action-form');
+jest.mock('../redux-service-demo.components', () => ({
   ServiceTabs: () => null,
   ActionSelect: () => null,
   StateMonitor: () => null,
   stateToString: () => 'stateToStringMock',
 }));
-jest.mock('./config', () => ({
+jest.mock('../config', () => ({
   config: { title: 'mocked title' },
 }));
 

@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import * as components from './action-form.components';
+import * as components from '../action-form.components';
 import services from './example-services';
 
 test('returns the correct active action form fields, given a service object, service name and action type', () => {

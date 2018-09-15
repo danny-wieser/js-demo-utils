@@ -1,5 +1,5 @@
 import { shallow } from 'enzyme';
-import * as components from './redux-service-demo.components';
+import * as components from '../redux-service-demo.components';
 import services from './example-services';
 
 test('will render an action option select control', () => {
