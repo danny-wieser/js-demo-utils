@@ -37,7 +37,7 @@ function initializeDemoStore(services) {
 
 function initDemoLogging() {
   log.setLevel('INFO');
-  log.info('[redux-service-demo:]');
+  log.info('[redux-service-demo: @VERSION@]');
 }
 
 const renderDemo = (services, container) => {

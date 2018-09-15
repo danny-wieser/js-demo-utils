@@ -17,7 +17,8 @@
     "css-build": "node-sass --omit-source-map-url src/index.scss styles/index.css",
     "demobuild": "webpack --config demo/webpack.config.js --mode=production",
     "versionbump": "npm version patch -m \"Bumping to %s\"",
-    "deploy": "yarn clean && yarn versionbump && yarn build && yarn demobuild"
+    "deploy": "yarn clean && yarn versionbump && yarn build && yarnadd-version && yarn demobuild",
+    "add-version":  "replace -s \"@VERSION@\" $npm_package_version dist/*.js"
   },
   "files": [
     "dist/**/*.*",
