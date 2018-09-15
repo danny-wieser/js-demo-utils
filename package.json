@@ -9,7 +9,7 @@
   "homepage": "https://danny-wieser.github.io/redux-service-demo/",
   "scripts": {
     "clean": "rimraf dist coverage yarn-error.log demo/dist",
-    "build": "babel src --out-dir dist --ignore '**/*.spec.js' && yarn run css-build",
+    "build": "babel src --out-dir dist --ignore '**/__test__' && yarn run css-build",
     "start": "yarn run clean && babel src --out-dir dist --ignore '**/*.spec.js' --watch",
     "test": "jest --coverage --collectCoverageFrom=src/** && yarn run lint",
     "demo": "webpack-serve --config demo/webpack.config.js --content demo",
