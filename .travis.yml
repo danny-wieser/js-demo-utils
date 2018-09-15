@@ -1,3 +1,10 @@
 language: node_js
 node_js:
-  - "node"
+- node
+before_deploy:
+- yarn clean && yarn build
+deploy:
+  api_key:
+    secure: bF5B7K0tKkNn2mHHE3VjlfKkmwPosIExWcu6G1mh5eDDqu4nwkjA55WBFooCnZJZUuITrQim0dlsOOcF3DsmZcJAhL+FxU2joXEwmvALT52M+ufwKFy+hQtpi5LFRPrKdB/X2kObnIfQPW20d2tzX16cBBqUN+PBuLuwW7bHrnwUbgOnR6lAaha7AXXL9x8O7teddB1dtfRBbsgFfVEQ3knuvp+O0jU6CJ96P26+mQjBii51v5qbk9p36CduSY4SA+BMBkMdTF0qdqZISWnjVVCpQorXLtPl6RQSNWoqxjqySS31skfoxpZxIE+pNkEOe4aHlXzq0AQG0TWJqocnE52kBF4AE91xxdEj/jz369ngrZ20RrxZq1tDRZ6416J/RmeQubq2pTI70JDrlktQgufu/3U24QcDepqUJtiu8YxdoX99gM5sDAH3Z+hpC+lQH8YC4uMCClQ7ET8uVM9Fs04h9yhSzkpXmPHG5/II+E6CM2oU7caxsWgkFBs9IrSw+TcFXhFmg2riv72+sovAe4xg0NDAFYlI8IX5pN9JdVjpTS4o3fKBpeJH+PKv6b0SDWXnPrXQvOUKNCHBC4GIiWS1wA1cwXQyYUmmwWvx0QOzDojTPibo7N86lX99YzNzsKx3WiE2qOYmlsK/iJ8mAsmmQZZjNkSiDb0E2JZ1MRE=
+  on:
+    tags: true
