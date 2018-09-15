@@ -9,7 +9,7 @@ deploy:
     email: "danny.wieser@gmail.com"
     api_key: $NPM_TOKEN
     on:
-      tags: true
+      branch: master
   - provider: pages
     skip-cleanup: true
     github-token: $GITHUB_TOKEN
