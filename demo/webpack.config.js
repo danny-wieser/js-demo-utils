@@ -1,4 +1,4 @@
-const path = require('path');
+  const path = require('path');
 
 const filename = './dist/app.js';
 const outpath = __dirname;
@@ -17,5 +17,8 @@ module.exports = () => {
     output: { filename, path: outpath },
     entry,
     resolve: { extensions: ['.js', '.jsx'] },
+    performance: {
+      hints: process.env.NODE_ENV === 'production' ? "warning" : false
+    }
   };
 };
