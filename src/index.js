@@ -37,8 +37,7 @@ function initializeDemoStore(services) {
 
 function initDemoLogging() {
   log.setLevel('INFO');
-  /* eslint-disable no-undef */
-  log.info(`[redux-service-demo: ${VERSION}]`);
+  log.info('[redux-service-demo:]');
 }
 
 const renderDemo = (services, container) => {
