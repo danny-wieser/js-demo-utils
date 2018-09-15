@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as log from 'loglevel';
 import PropTypes from 'prop-types';
 import * as components from './action-form.components';
 import { parseFieldValue } from './util';
@@ -49,7 +50,7 @@ export default class ActionForm extends React.Component {
     const service = services[activeService];
     const actionDispatch = service.actions[activeAction];
     const params = Object.values(formValues);
-    console.info(`handleSubmit|${activeService}|${activeAction}|`, formValues);
+    log.info(`handleSubmit|${activeService}|${activeAction}|`, formValues);
     store.dispatch(actionDispatch(...params));
     const resetFormValues = components.getDefaultFormValues(formFields);
     this.setState({ formValues: resetFormValues });

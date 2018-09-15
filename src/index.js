@@ -1,5 +1,6 @@
 /* eslint-env browser */
 import 'url-search-params-polyfill';
+import * as log from 'loglevel';
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
 import {
@@ -34,9 +35,16 @@ function initializeDemoStore(services) {
   return createStore(combinedReducers, applyMiddleware(...middlewares));
 }
 
+function initDemoLogging() {
+  log.setLevel('INFO');
+  /* eslint-disable no-undef */
+  log.info(`[redux-service-demo: ${VERSION}]`);
+}
+
 const renderDemo = (services, container) => {
   const demoStore = initializeDemoStore(services);
   const params = getParams();
+  initDemoLogging();
   ReactDOM.render(<ReduxServiceDemo
     services={services}
     store={demoStore}
