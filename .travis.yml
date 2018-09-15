@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - node
 before_deploy:
-- yarn clean && yarn build && yarn predeploy
+- yarn deploy
 deploy:
   - provider: npm
     skip-cleanup: true
