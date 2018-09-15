@@ -16,7 +16,8 @@
     "lint": "eslint .",
     "css-build": "node-sass --omit-source-map-url src/index.scss styles/index.css",
     "demobuild": "webpack --config demo/webpack.config.js --mode=production",
-    "deploy": "yarn version --patch && yarn clean && yarn build && yarn demobuild"
+    "versionbump": "npm version patch -m \"Bumping to %s\"",
+    "deploy": "yarn clean && yarn versionbump && yarn build && yarn demobuild"
   },
   "files": [
     "dist/**/*.*",
