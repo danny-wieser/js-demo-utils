@@ -1,13 +1,13 @@
 # redux-service-demo
 A React UI for testing Redux Service components without the need to integrate them into a large application
 
-[![Build Status](https://travis-ci.org/danny-wieser/redux-service-demo.svg?branch=master)](https://travis-ci.org/danny-wieser/redux-service-demo)
+[![Build Status](https://travis-ci.org/dannywieser/redux-service-demo.svg?branch=master)](https://travis-ci.org/dannywieser/redux-service-demo)
 
-See the demo here: https://danny-wieser.github.io/redux-service-demo/
+See the demo here: https://dannywieser.github.io/redux-service-demo/
 
 Demo uses the fake todos api available here: http://jsonplaceholder.typicode.com/
 
-Demo also uses the redux-service-utils from here to reduce boilerplate in the async service code: https://github.com/danny-wieser/redux-service-util
+Demo also uses the redux-service-utils from here to reduce boilerplate in the async service code: https://github.com/dannywieser/redux-service-util
 
 ## Overview
 
